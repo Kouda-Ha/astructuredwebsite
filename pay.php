@@ -5,16 +5,19 @@
 <meta charset="UTF-8"> 
 <title>pay</title>
 <link type="text/css" href="css/style.css" rel="stylesheet">
+  <script src="js/validate.js"></script>
+  <script>
+	window.addEventListener('DOMContentLoaded', function() {
+		let validator = new FormValidator();
+	});
+  </script>
 </head>
-<?php
-	$dateObj = new DateTime();
-	echo $dateObj->format("Y");
-?>
 <body>
-Card Number <input /><br>
- <label for="expirationDate">Expiration Date: </label>
 
-<select name="expirationDate" id="expirationDate">
+<form id="myForm">
+<label for="cardNumber">Card Number </label><input id="cardNumber" /><br>
+
+<label for="expirationDate">Expiration Date: </label><select name="expirationDate" id="expirationDate">
 <?php
 	for ($month = 1 ; $month <= 12 ; $month++) {
 		$dateObject = DateTime::createFromFormat('!m', $month);
@@ -33,6 +36,10 @@ Card Number <input /><br>
 ?>
 </select>
 
-Security Code <input />
+<label for="securityCode">Security Code: </label><input id="securityCode"/><br>
+ 
+<input type="submit" value="submit" />
+</form>
+
 </body>
 </html>

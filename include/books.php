@@ -18,6 +18,29 @@ class Book {
 		$this->image = $argv['image'];
 		$this->isbn = $argv['isbn'];
 	}
+	function figure($index=-1) {
+		$paybtn = "";
+		if ($index > -1) {
+			$paybtn = <<<EOF
+			<form method='get' action='pay.php'>
+				<input type='hidden' name='book' value='{$index}' />
+				<input type='submit' value='pay'/>
+			</form>
+EOF;
+		}
+		echo <<<EOF
+	<figure class='bookBlock'>
+		<img class='bookImage' src='images/books/{$this->image}' alt='Cover for {$this->title}'>
+		<figcaption>
+			<header class='bookTitle'><h2>{$this->title}</h2></header>
+			<section class='bookDescription'>{$this->description}</section>
+			<section class='bookPrice'>{$this->price}</section>
+			{$paybtn}
+		</figcaption>
+	</figure>
+EOF;
+	
+	}
 }
 
 $bookArr = array(
@@ -26,7 +49,7 @@ $bookArr = array(
 		'description' => 'Feeling stressed? Need some help to regain balance in your life? The Little Book of Calm is full of advice to follow and thought to inspire. Open it at any page and you will find a path to inner peace.',
 		'author' => 'Paul Wilson',
 		'price' => '£4.99',
-		'image' => '',
+		'image' => 'littlebookofcalm.jpeg',
 		'isbn' => '978-0-140-28526-0'
 	)),
 	new Book(array(
@@ -34,7 +57,7 @@ $bookArr = array(
 		'description' => 'Since it was first published in 1984. Japanese for Busy People has won acclain world-wide as an effective, easy-to-understand textbook, either for classroom use or for independent study. Now, in a major new revision, the series has been redesigned, updated, and consolidated to meet the needs of students and businesspeople who want to learn natural, spoken Japanese as effectively as possible in a limited amount of time.',
 		'author' => 'Association for Japanese-Language Teaching',
 		'price' => '$29.00',
-		'image' => '',
+		'image' => 'jfbp2.jpeg',
 		'isbn' => '978-1-56836-386-8'
 	)),
 	new Book(array(
@@ -42,7 +65,7 @@ $bookArr = array(
 		'description' => 'Most programming languages contain good and bad components, but javascript has more than its share of the latter, as it was developped and released in a hurry, before it could be refined. This authoritative book scrapes away the most horrendous features to reveal a subset of JavaScript that\'s ,pre re;oable, readable and maintainable than the languge as a whole - a subset you can use to create turly extensible and efficient code.',
 		'author' => 'Douglas Crockford',
 		'price' => '$29.00',
-		'image' => '',
+		'image' => 'jtgp.jpeg',
 		'isbn' => '978-0-596-51774-8'
 	)),
 	new Book(array(
@@ -50,7 +73,7 @@ $bookArr = array(
 		'description' => 'The Art of Reflection, Histories Forsaken.',
 		'author' => 'Square Enix Co. Ltd.',
 		'price' => '$39.99',
-		'image' => '',
+		'image' => 'ffxiv.jpeg',
 		'isbn' => '978-1-64609-061-7'
 	)),
 );

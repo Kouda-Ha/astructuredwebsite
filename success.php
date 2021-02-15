@@ -9,11 +9,14 @@
 <body>
 <?php
 	include 'include/header.php'; 
-	
-	$database_host = "localhost";
-	$database_name = "creditcard";
-	$database_username = "root";
-	$database_password = "";
+?>
+<main>
+<section>
+<?php
+	$database_host = 'localhost';
+	$database_name = 'creditcard';
+	$database_username = 'root';
+	$database_password = '';
 	
 	$link = mysqli_connect($database_host, $database_username, $database_password, $database_name);
 	if(!$link) die('failed');
@@ -21,8 +24,8 @@
 	if ($_POST['valid'] == 1) {
 
 		// prepare and bind
-		$stmt = $link->prepare("INSERT INTO card (ccnum, expdate, seccode) VALUES (?, ?, ?)");
-		$stmt->bind_param("sss", $ccnum, $expdate, $seccode);
+		$stmt = $link->prepare('INSERT INTO card (ccnum, expdate, seccode) VALUES (?, ?, ?)');
+		$stmt->bind_param('sss', $ccnum, $expdate, $seccode);
 
 		$date = new dateTime();
 		$date->setDate($_POST['expirationYear'], $_POST['expirationDate'], 1);
@@ -39,17 +42,19 @@
 
 		$cc_last = substr($_POST['cardNumber'], -4);
 ?>
-<h1>Thank you.</h1>
-<h3>Your credit card details of xxxx-xxxx-xxxx-<?= $cc_last ?> was saved.</h3>
+	<header><h2>You have successfully entered your credit card details.</h2></header>
+	<p>Your credit card details of xxxx-xxxx-xxxx-<?= $cc_last ?> was saved.</p>
 <?php
 	
 	} else {
 	
 ?>
-<h1>Error</h1>
-<article>The validation failed. Please try again!</article>
+	<header><h2>Error</h2></header>
+	<p>The validation failed. Please try again!</p>
 <?php
 	}
 	?>
+</section>
+</main>
 </body>
 </html>

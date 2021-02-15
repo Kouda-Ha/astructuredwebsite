@@ -8,18 +8,14 @@
 <body>
 <?php
 include 'include/header.php';
-?>
-
-<main class = 'booksList'>
-
-<?php
 include 'include/books.php';
-	foreach ($bookArr as $index => $book){
-		$book->figure($index);
-	}
 
+echo "<main class='booksList'>\n";
+
+foreach ($bookArr as $index => $book){
+	$book->figure($index);
+}
 ?>
 </main>
 </body>
 </html>
-

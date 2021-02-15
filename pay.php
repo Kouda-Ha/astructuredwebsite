@@ -26,10 +26,11 @@ $book = $bookArr[$bookId];
 
 <form id='myForm' action='success.php' method='post'>
 <section id='issues' class='hidden'>
+	<header><h3>Issues</h3></header>
 	<ul id='issuesList'>
 
 	</ul>
-	<a href = 'pay.php?book=<?= $bookID ?>'> Please try again. </a>
+	<a href = 'pay.php?book=<?= $bookId ?>'> Please try again. </a>
 </section>
 
 <table>
@@ -39,24 +40,24 @@ $book = $bookArr[$bookId];
 	</tr>
 	<tr>
 		<td><label for='expirationDate'>Expiration Date: </label></td>
-		<td><select name='expirationDate' id='expirationDate'>
+		<td>
 <?php
+	echo "\t\t\t<select name='expirationDate' id='expirationDate'>\n";
 	for ($month = 1 ; $month <= 12 ; $month++) {
 		$dateObject = DateTime::createFromFormat('!m', $month);
-		printf("  <option value=\"%'.02d\">%s</option>\n", $month-1, $dateObject->format('F'));
+		printf("\t\t\t\t<option value=\"%'.02d\">%s</option>\n", $month-1, $dateObject->format('F'));
 	}
 
-?>
-</select>
-<select name='expirationYear' id='expirationYear'>
-<?php
+	echo "\t\t\t</select>\n\t\t\t<select name='expirationYear' id='expirationYear'>\n";
 	$dateObject = new DateTime();
 	$currentYear = intval($dateObject->format('Y'));
 	for ($year = $currentYear ; $year < $currentYear+20 ; $year++) {
-		printf("  <option value=\"%1\$d\">%1\$d</option>\n", $year);
+		printf("\t\t\t\t<option value=\"%1\$d\">%1\$d</option>\n", $year);
 	}
+	echo "\t\t\t</select>";
 ?>
-</select></td>
+
+		</td>
 	</tr>
 	<tr>
 		<td><label for='securityCode'>Security Code: </label></td>
@@ -66,9 +67,10 @@ $book = $bookArr[$bookId];
 		<td colspan='2'>
 			<input type='hidden' name='valid' id='valid' value='0' />
 			<input type='hidden' name='book' value='<?= $bookId ?>' />
-			<input type='submit' value='submit' />
+			<input type='submit' value='Continue' />
 		</td>
 	</tr>
+</table>
 </form>
 <script src='js/validate.js'></script>
 </main>

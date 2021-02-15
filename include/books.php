@@ -33,11 +33,13 @@ EOF;
 		<img class='bookImage' src='images/books/{$this->image}' alt='Cover for {$this->title}'>
 		<figcaption>
 			<header class='bookTitle'><h2>{$this->title}</h2></header>
-			<section class='bookDescription'>{$this->description}</section>
-			<section class='bookPrice'>{$this->price}</section>
-			{$paybtn}
+			<p class='bookDescription'>{$this->description}</p>
+			<p class='bookIsbn'>ISBN: {$this->isbn}</p>
+			<p class='bookPrice'>{$this->price}</p>
+{$paybtn}
 		</figcaption>
 	</figure>
+
 EOF;
 	
 	}
@@ -48,7 +50,7 @@ $bookArr = array(
 		'title' => 'Little Book of Calm',
 		'description' => 'Feeling stressed? Need some help to regain balance in your life? The Little Book of Calm is full of advice to follow and thought to inspire. Open it at any page and you will find a path to inner peace.',
 		'author' => 'Paul Wilson',
-		'price' => '£4.99',
+		'price' => '$4.99',
 		'image' => 'littlebookofcalm.jpeg',
 		'isbn' => '978-0-140-28526-0'
 	)),
@@ -62,7 +64,7 @@ $bookArr = array(
 	)),
 	new Book(array(
 		'title' => 'JavasScript The Good Parts',
-		'description' => 'Most programming languages contain good and bad components, but javascript has more than its share of the latter, as it was developped and released in a hurry, before it could be refined. This authoritative book scrapes away the most horrendous features to reveal a subset of JavaScript that\'s ,pre re;oable, readable and maintainable than the languge as a whole - a subset you can use to create turly extensible and efficient code.',
+		'description' => 'Most programming languages contain good and bad components, but javascript has more than its share of the latter, as it was developped and released in a hurry, before it could be refined. This authoritative book scrapes away the most horrendous features to reveal a subset of JavaScript that\'s more reliable, readable and maintainable than the languge as a whole - a subset you can use to create turly extensible and efficient code.',
 		'author' => 'Douglas Crockford',
 		'price' => '$29.00',
 		'image' => 'jtgp.jpeg',
@@ -77,6 +79,5 @@ $bookArr = array(
 		'isbn' => '978-1-64609-061-7'
 	)),
 );
-
 
 ?>

@@ -1,4 +1,3 @@
-<!-- pay -->
 <!DOCTYPE HTML>
 <html lang='en'>
 <head>
@@ -8,6 +7,9 @@
 
 </head>
 <body>
+<?php	
+include 'include/header.php'; 
+?>
 <section id='issues' class='hidden'>
 	<ul id='issuesList'>
 
@@ -22,7 +24,7 @@
 <?php
 	for ($month = 1 ; $month <= 12 ; $month++) {
 		$dateObject = DateTime::createFromFormat('!m', $month);
-		printf("  <option value=\"%'.02d\">%s</option>\n", $month, $dateObject->format('F'));
+		printf("  <option value=\"%'.02d\">%s</option>\n", $month-1, $dateObject->format('F'));
 	}
 
 ?>

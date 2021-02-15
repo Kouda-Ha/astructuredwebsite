@@ -13,32 +13,27 @@ class FormValidator {
 			"valid": document.getElementById("valid"),
 			"issuesList" : document.getElementById("issuesList"),
 			"issues" : document.getElementById("issues"),
-			
 		};
 		
 		// setup event handlers.
 		// We need to use "bind" or else it uses 'window' as the function's object and not this object.
 		// silly old callbacks.
 		this.element['form'].onsubmit = this.onSubmit.bind(this);
-		
 	}
 	
 	issue(string){
 		let newIssue = document.createElement("li");
 		newIssue.appendChild(document.createTextNode(string));
 		this.element["issuesList"].appendChild(newIssue);
-		
 	}
 	
 	clearIssues(){
-		this.element["issuesList"].innerHTML = "";
-		
-		}
+		this.element["issuesList"].innerHTML = "";	
+	}
 	
 	
 	//pad put to validate, using regex
 	validateCardNumber() {
-		console.log(this.element["cardNumber"].value);
 		let passed = true;
 		let val = this.element["cardNumber"].value;
 		if (val.length < 16){
@@ -59,11 +54,29 @@ class FormValidator {
 	}
 
 	validateExpirationDate() {
-		return true;
+		let passed = true;
+		let valMonth = this.element["expirationDate"].value;
+		let valYear = this.element["expirationYear"].value;
+		
+		// Card details are valid until the first day of the next month.
+		let expDate = new Date(parseInt(valYear), parseInt(valMonth) + 1, 1);
+		let now = new Date();
+		if (expDate < now) {
+			passed = false;
+			this.issue("The expiration date appears to be in the past.");
+		}
+		return passed;
 	}
 	
 	validateSecurityCode() {
-		return true;
+		let passed = true;
+		let val = this.element["securityCode"].value;
+		let regexp = /^[0-9]{3,4}$/;
+		if (!regexp.test(val)){
+			passed = false;
+			this.issue("The security code did not look like a security code. Must be 3-4 numbers.");
+		}
+		return passed;
 	}
 	
 	onSubmit(event) {

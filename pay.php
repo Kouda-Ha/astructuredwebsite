@@ -7,10 +7,12 @@
 
 </head>
 <body>
-<?php	
+<?php
+//Include the Header
 include 'include/header.php';
 include 'include/books.php';
 
+//Gets the book the user is interested in buying
 $bookId = $_GET['book'];
 $book = $bookArr[$bookId];
 
@@ -33,6 +35,7 @@ $book = $bookArr[$bookId];
 	<a href = 'pay.php?book=<?= $bookId ?>'> Please try again. </a>
 </section>
 
+<!-- Displays the table where user inputs their credit card details for verification -->
 <table>
 	<tr>
 		<td><label for='cardNumber'>Card Number </label></td>
@@ -42,12 +45,14 @@ $book = $bookArr[$bookId];
 		<td><label for='expirationDate'>Expiration Date: </label></td>
 		<td>
 <?php
+	//Drop down menu for the months
 	echo "\t\t\t<select name='expirationDate' id='expirationDate'>\n";
 	for ($month = 1 ; $month <= 12 ; $month++) {
 		$dateObject = DateTime::createFromFormat('!m', $month);
 		printf("\t\t\t\t<option value=\"%'.02d\">%s</option>\n", $month-1, $dateObject->format('F'));
 	}
-
+	
+	//Drop down menu for the year, starting in the current year and ending 20 years from now
 	echo "\t\t\t</select>\n\t\t\t<select name='expirationYear' id='expirationYear'>\n";
 	$dateObject = new DateTime();
 	$currentYear = intval($dateObject->format('Y'));
@@ -72,6 +77,10 @@ $book = $bookArr[$bookId];
 	</tr>
 </table>
 </form>
+<!--
+	Validation checked via this file
+	The JavaScript binds to the forms submit action and performs all validation at that step 
+-->
 <script src='js/validate.js'></script>
 </main>
 </body>

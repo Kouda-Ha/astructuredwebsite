@@ -18,6 +18,8 @@ class Book {
 		$this->image = $argv['image'];
 		$this->isbn = $argv['isbn'];
 	}
+	
+	//Produces markup for book widget
 	function figure($index=-1) {
 		$paybtn = "";
 		if ($index > -1) {
@@ -45,6 +47,7 @@ EOF;
 	}
 }
 
+//The array of books
 $bookArr = array(
 	new Book(array(
 		'title' => 'Little Book of Calm',

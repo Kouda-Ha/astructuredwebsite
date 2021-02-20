@@ -7,11 +7,13 @@
 </head>
 <body>
 <?php
+//Include the Header
 include 'include/header.php';
 include 'include/books.php';
 
 echo "<main class='booksList'>\n";
 
+//Loop through books and display the book widget for each
 foreach ($bookArr as $index => $book){
 	$book->figure($index);
 }

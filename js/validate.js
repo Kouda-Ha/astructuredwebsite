@@ -15,9 +15,9 @@ class FormValidator {
 			'issues' : document.getElementById('issues'),
 		};
 		
-		// setup event handlers.
-		// We need to use 'bind' or else it uses 'window' as the function's object and not this object.
-		// silly old callbacks.
+		// Setup event handlers.
+		// Uses 'bind' or else it uses 'window' as the function's object and not this object.
+		// Silly old callbacks.
 		this.element['form'].onsubmit = this.onSubmit.bind(this);
 	}
 	
@@ -32,7 +32,7 @@ class FormValidator {
 	}
 	
 	
-	//pad put to validate, using regex
+	//Validates credit card number, checks length and pattern matches, using regex
 	validateCardNumber() {
 		let passed = true;
 		let val = this.element['cardNumber'].value;
@@ -52,7 +52,7 @@ class FormValidator {
 		}
 		return passed;
 	}
-
+	//Checks date to make sure it isn't in the past
 	validateExpirationDate() {
 		let passed = true;
 		let valMonth = this.element['expirationDate'].value;
@@ -68,6 +68,7 @@ class FormValidator {
 		return passed;
 	}
 	
+	//Checks the security code is 3-4 numbers long, using regex
 	validateSecurityCode() {
 		let passed = true;
 		let val = this.element['securityCode'].value;
@@ -79,6 +80,7 @@ class FormValidator {
 		return passed;
 	}
 	
+	//Validates all the form fields, if passes, sets "valid" hidden field to true and allows normal form action to take place
 	onSubmit(event) {
 		this.clearIssues();
 		let passed = true;

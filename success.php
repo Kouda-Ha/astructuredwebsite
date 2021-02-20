@@ -7,6 +7,7 @@
 </head>
 <body>
 <?php
+	//Include the Header
 	include 'include/header.php'; 
 
 	$database_host = 'localhost';
@@ -19,20 +20,26 @@
 
 	if ($_POST['valid'] == 1) {
 
-		// prepare and bind
+		//Prepare and bind
 		$preparedQuery = $link->prepare('INSERT INTO card (ccnum, expdate, seccode) VALUES (?, ?, ?)');
 		$preparedQuery->bind_param('sss', $ccnum, $expdate, $seccode);
 
+		//Calculates the date as the last day of the month
 		$date = new dateTime();
 		$date->setDate($_POST['expirationYear'], $_POST['expirationDate'], 1);
 		$date->modify('+1 month -1 day');
 
-		// set parameters and execute
+		//Set parameters and execute
+		//Hash the credit card number
 		$ccnum = md5( $_POST['cardNumber']);
+		//Converts the date into string format (year-month-day)
 		$expdate = $date->format('Y-m-d');
+		//Stores security code as is
 		$seccode = $_POST['securityCode'];
+		//Stores all values in the database
 		$preparedQuery->execute();
-
+		
+		//Only prints the last 4 credit card number numbers
 		$cc_last = substr($_POST['cardNumber'], -4);
 
 		echo <<<EOF
@@ -45,7 +52,7 @@
 EOF;
 
 	} else {
-
+		//The user has arrived here without passing the JavaScript validation, displays try again message
 		echo <<<EOF
 	<main>
 	<section>

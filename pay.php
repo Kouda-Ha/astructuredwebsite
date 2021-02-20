@@ -67,7 +67,7 @@ $book = $bookArr[$bookId];
 		<td colspan='2'>
 			<input type='hidden' name='valid' id='valid' value='0' />
 			<input type='hidden' name='book' value='<?= $bookId ?>' />
-			<input type='submit' value='Continue' />
+			<input type='submit' value='Continue' id='continueButton' />
 		</td>
 	</tr>
 </table>

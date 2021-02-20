@@ -27,14 +27,6 @@ $book = $bookArr[$bookId];
 </section>
 
 <form id='myForm' action='success.php' method='post'>
-<section id='issues' class='hidden'>
-	<header><h3>Issues</h3></header>
-	<ul id='issuesList'>
-
-	</ul>
-	<a href = 'pay.php?book=<?= $bookId ?>'> Please try again. </a>
-</section>
-
 <!-- Displays the table where user inputs their credit card details for verification -->
 <table>
 	<tr>
@@ -71,7 +63,7 @@ $book = $bookArr[$bookId];
 	<tr>
 		<td colspan='2'>
 			<input type='hidden' name='valid' id='valid' value='0' />
-			<input type='hidden' name='book' value='<?= $bookId ?>' />
+			<input type='hidden' name='book' id='book' value='<?= $bookId ?>' />
 			<input type='submit' value='Continue' id='continueButton' />
 		</td>
 	</tr>

@@ -2,31 +2,63 @@
 	
 class FormValidator {
 	constructor() {
-
-		// Find all the interesting elements.
+		//Find all the interesting elements.
 		this.element = {
 			'form': document.getElementById('myForm'),
+			'book': document.getElementById('book'),
 			'cardNumber': document.getElementById('cardNumber'),
 			'expirationDate': document.getElementById('expirationDate'),
 			'expirationYear': document.getElementById('expirationYear'),
 			'securityCode': document.getElementById('securityCode'),
 			'valid': document.getElementById('valid'),
-			'issuesList' : document.getElementById('issuesList'),
-			'issues' : document.getElementById('issues'),
 		};
 		
-		// Setup event handlers.
-		// Uses 'bind' or else it uses 'window' as the function's object and not this object.
-		// Silly old callbacks.
+		this.createIssuesSection();
+		
+		//Setup event handlers.
+		//Uses 'bind' or else it uses 'window' as the function's object and not this object.
+		//Silly old callbacks.
 		this.element['form'].onsubmit = this.onSubmit.bind(this);
 	}
 	
+	//Create the issues list
+	//This isn't being done in the HTML because it would otherwise be picked up by 
+	//screen-readers even when it's hidden with css.
+	createIssuesSection(bookId){
+		//Create a container to store the list of issues 
+		let issuesSection = document.createElement('section');
+		issuesSection.innerHTML = "<header><h3>Issues</h3></header>";
+		issuesSection.classList.add('hidden');
+		issuesSection.id='issues';
+		
+		//Create the actual list, and add it to the container.
+		let issuesList = document.createElement('ul');
+		issuesSection.appendChild(issuesList);
+		
+		//Create a try again link to be shown along with the list of issues
+		//As mandated by the specification, then add it to the container.
+		let tryAgainLink = document.createElement('a');
+		tryAgainLink.href = 'pay.php?book=' + this.element['book'].value;
+		tryAgainLink.innerText = ' Please try again.';
+		issuesSection.appendChild(tryAgainLink);
+		
+		//Add the container to the form.
+		this.element['form'].insertBefore(issuesSection, this.element['form'].firstChild);
+		
+		//Add the bits to the list of elements.
+		this.element['issues'] = issuesSection;
+		this.element['issuesList'] = issuesList;		  
+	}
+	
+	//Prints out the issues to the screen
+	//Each time this is called a new list element would be added to the issues
 	issue(string){
 		let newIssue = document.createElement('li');
 		newIssue.appendChild(document.createTextNode(string));
 		this.element['issuesList'].appendChild(newIssue);
 	}
 	
+	//Resets the issues list so it is empty
 	clearIssues(){
 		this.element['issuesList'].innerHTML = '';	
 	}
